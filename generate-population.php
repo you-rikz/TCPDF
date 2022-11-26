@@ -51,10 +51,29 @@ function BasicTable($headers, $data)
     // Data
     foreach($data as $row)
     {
+        $country_num = array_slice($row, 1, 1,true);
         foreach($row as $col)
-            $this->Cell(35,10,$col,1);
-			foreach 
-        $this->Ln();
+            $this->Cell(35,18,$col,1);
+			foreach($country_num as $num)
+            $style = array(
+                'position' => '',
+                'align' => 'C',
+                'stretch' => false,
+                'fitwidth' => true,
+                'cellfitalign' => '',
+                'border' => true,
+                'hpadding' => 'auto',
+                'vpadding' => 'auto',
+                'fgcolor' => array(0,0,0),
+                'bgcolor' => false, //array(255,255,255),
+                'text' => true,
+                'font' => 'helvetica',
+                'fontsize' => 8,
+                'stretchtext' => 4
+            );
+            // $this->Cell(0, 0, 'CODE 93 - USS-93', 0, 1);
+            $this->write1DBarcode($num, 'C93', '', '', 35 , 18, 0.4, $style, '');
+            $this->Ln();
 
     }
 
