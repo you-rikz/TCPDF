@@ -46,16 +46,17 @@ function BasicTable($headers, $data)
 {
     // Headers
     foreach($headers as $col)
-        $this->Cell(35,10,$col,1);
+        $this->Cell(38,10,$col,1);
     $this->Ln();
     // Data
     foreach($data as $row)
     {
         $country_num = array_slice($row, 1, 1,true);
+
         foreach($row as $col)
-            $this->Cell(35,18,$col,1);
+            $this->Cell(38,38,$col,1);
 			foreach($country_num as $num)
-            $style = array(
+            $bar_code = array(
                 'position' => '',
                 'align' => 'C',
                 'stretch' => false,
@@ -71,8 +72,19 @@ function BasicTable($headers, $data)
                 'fontsize' => 8,
                 'stretchtext' => 4
             );
+        
+             $qr_code = array(
+                'border' => 2,
+                'vpadding' => 'auto',
+                'hpadding' => 'auto',
+                'fgcolor' => array(0,0,0),
+                'bgcolor' => false, //array(255,255,255)
+                'module_width' => 1, // width of a single module in points
+                'module_height' => 1 // height of a single module in points
+            );
             // $this->Cell(0, 0, 'CODE 93 - USS-93', 0, 1);
-            $this->write1DBarcode($num, 'C93', '', '', 35 , 18, 0.4, $style, '');
+            $this->write1DBarcode($num, 'C93', '', '', 38 , 38, 0.4, $bar_code, '');
+            $this->write2DBarcode($num, 'QRCODE,L', '', '', 38, 38, $qr_code, '');
             $this->Ln();
 
     }
