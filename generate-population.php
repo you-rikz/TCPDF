@@ -55,6 +55,8 @@ function BasicTable($headers, $data)
 
         foreach($row as $col)
             $this->Cell(38,38,$col,1);
+            $x = $this->GetX();
+				$y = $this->GetY();
 			foreach($country_num as $num)
             $bar_code = array(
                 'position' => '',
@@ -84,7 +86,7 @@ function BasicTable($headers, $data)
             );
             // $this->Cell(0, 0, 'CODE 93 - USS-93', 0, 1);
             $this->write1DBarcode($num, 'C93', '', '', 38 , 38, 0.4, $bar_code, '');
-            $this->write2DBarcode($num, 'QRCODE,L', '', '', 38, 38, $qr_code, '');
+            $this->write2DBarcode($num, 'QRCODE,L', $x+39, $y, 38, 38, $qr_code, '');
             $this->Ln();
 
     }
